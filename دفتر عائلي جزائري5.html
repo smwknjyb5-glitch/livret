@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دفتر عائلي جزائري</title>
+<style>
+:root{--bg:#eef1ee;--fg:#1d2b22;--bar:#fff;--bd:#c9d3cc;--g:#0b6b3a;--r:#c8102e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15201a;--fg:#e8efe9;--bar:#1f2d25;--bd:#3a4d41}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Segoe UI",Tahoma,"Noto Naskh Arabic",Arial,sans-serif}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bar);border-bottom:1px solid var(--bd);padding:8px 10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bar);z-index:10}
+button{font:inherit;border:1px solid var(--g);background:var(--g);color:#fff;border-radius:8px;padding:6px 14px;cursor:pointer}
+button.alt{background:transparent;color:var(--g)}
+button.on{background:var(--r);border-color:var(--r)}
+.bar input{font:inherit;padding:5px 8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--fg);width:150px}
+.hint{font-size:13px;opacity:.8;width:100%}
+.wrap{padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:18px;overflow-x:auto}
+.page{zoom:var(--z,1);position:relative;width:794px;min-height:1000px;background:#fbf7ea;color:#1b1b1b;border:3px double #0b6b3a;box-shadow:0 4px 18px #0004;padding:34px 40px;flex:none}
+.page h2{text-align:center;color:#0b6b3a;margin:0 0 4px;font-size:26px}
+.page .sub{text-align:center;font-size:14px;margin-bottom:16px;color:#555}
+.top{text-align:center;line-height:1.7;font-weight:bold}
+.top small{display:block;font-weight:normal;font-size:14px}
+.flag{height:10px;margin:10px auto;width:160px;background:linear-gradient(90deg,#0b6b3a 50%,#fff 50%);border:1px solid #0b6b3a}
+.cover{display:flex;flex-direction:column;justify-content:center}
+.cover h1{font-size:56px;color:#0b6b3a;text-align:center;margin:40px 0 10px}
+.f{display:flex;align-items:center;gap:8px;margin:11px 0}
+.f label{min-width:150px;font-weight:bold;font-size:15px}
+.f input,.f select,.f textarea{flex:1;font:inherit;font-size:16px;border:0;border-bottom:1.5px dotted #666;background:#fffdf3;padding:4px 6px;color:#0a2a8a;min-width:0}
+.ro input,.ro select,.ro textarea{background:transparent;border-bottom-style:solid;border-bottom-color:#bbb;pointer-events:none;appearance:none;-webkit-appearance:none}
+table{width:100%;border-collapse:collapse;margin-top:6px}
+th,td{border:1.5px solid #0b6b3a;padding:3px;font-size:14px}
+th{background:#e4efe3}
+td input,td select{width:100%;font:inherit;font-size:14px;border:0;background:transparent;color:#0a2a8a;padding:6px 2px;text-align:center}
+.ro td input,.ro td select{pointer-events:none;appearance:none;-webkit-appearance:none}
+.sz{position:absolute;bottom:34px;left:40px;width:260px;height:170px;border:1.5px dashed #888;text-align:center;font-size:14px;padding-top:6px;color:#555}
+.sz.r{left:auto;right:40px;height:120px}
+.num{position:absolute;bottom:8px;width:100%;left:0;text-align:center;font-size:12px;color:#777}
+.layer{position:absolute;inset:0;pointer-events:none}
+.ph{position:relative;border:1.5px dashed #888;background:#fffdf3;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#777;font-size:13px;text-align:center}
+.ph.big{position:absolute;top:34px;left:40px;width:120px;height:150px}
+.ph.sm{width:46px;height:58px;margin:auto;font-size:9px}
+.ph input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;padding:0}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.ph.has img{display:block}.ph.has span{display:none}
+.ph .x{position:absolute;top:0;right:0;z-index:2;display:none;background:#c8102e;color:#fff;width:18px;height:18px;line-height:18px;text-align:center;font-size:14px;cursor:pointer;border-radius:0 0 0 6px}
+.ph.has .x{display:block}
+.ro .ph .x{display:none!important}
+.ro .ph{border-style:solid;border-color:#bbb}
+body.stamping .page{cursor:crosshair}
+body.stamping .layer{pointer-events:none}
+.stamp{position:absolute;width:var(--ss,150px);height:var(--ss,150px);margin:calc(var(--ss,150px)/-2) 0 0 calc(var(--ss,150px)/-2);border-radius:50%;border:4px double var(--sc,#1b3fbf);color:var(--sc,#1b3fbf);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:bold;font-size:calc(var(--ss,150px)*.087);line-height:1.35;padding:12%;transform:rotate(var(--rot,-8deg));opacity:.82;mix-blend-mode:multiply;pointer-events:auto;touch-action:none;cursor:move;user-select:none}
+.stamp::before{content:"★";font-size:18px}
+.stamp b{font-size:1.08em}
+body:not(.stamping) .stamp{pointer-events:none}
+.sig{position:absolute;bottom:8px;left:0;right:0}
+.book{display:none;flex-direction:column;align-items:center;gap:18px;padding:14px 8px;overflow-x:auto}
+body.bookview .wrap{display:none}body.bookview .book{display:flex}
+.bw{display:flex;flex-direction:column;align-items:center}
+.sheet{display:flex;direction:ltr;width:1118px;height:794px;background:#fff;box-shadow:0 4px 18px #0004;position:relative;flex:none;zoom:var(--z,1);overflow:hidden}
+.sheet::after{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:1px dashed #999}
+.cell{width:559px;height:794px;overflow:hidden;position:relative;flex:none}
+.cell .page{direction:rtl;transform:scale(.704);transform-origin:top left;zoom:1;width:794px;height:1128px;min-height:0;box-shadow:none;margin:0}
+.sl{font-size:13px;margin:4px 0}
+@media print{.page{zoom:1!important}.ph .x{display:none!important}.ph:not(.has) span{visibility:hidden}body.bookview .book{display:block;padding:0}.sl{display:none}.bw{display:block;page-break-after:always}.sheet{zoom:1!important;box-shadow:none;width:1122px;height:793px}.sheet::after{display:none}.cell{width:561px}.cell .page{page-break-after:auto}.bar,body::before{display:none}.wrap{padding:0;gap:0}.page{box-shadow:none;page-break-after:always;margin:0}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="bar">
+<button id="bFill" onclick="mode(0)">✍️ وضع التعبئة</button>
+<button id="bStamp" class="alt" onclick="mode(1)">🔖 عرض للختم</button>
+<button id="bBook" class="alt" onclick="toggleBook()">📖 كتيّب قابل للطي</button>
+<input id="s1" data-k="s1" placeholder="سطر الختم 1 (بلدية ...)">
+<input id="s2" data-k="s2" placeholder="سطر الختم 2" value="مصلحة الحالة المدنية">
+<input id="s3" data-k="s3" placeholder="سطر 3 (التاريخ)">
+<input type="color" id="sc" data-k="sc" value="#1b3fbf" title="لون الختم" style="width:44px;padding:0;height:34px">
+<span style="display:flex;align-items:center;gap:4px">📄 حجم الصفحة <button class="alt" onclick="zoomBy(-.1)">−</button><input type="range" id="zr" min="0.3" max="1.6" step="0.05" style="width:90px" oninput="setZ(+this.value)"><button class="alt" onclick="zoomBy(.1)">+</button><button class="alt" onclick="fitZ()">ملاءمة</button><span id="zv" style="min-width:38px"></span></span>
+<span style="display:flex;align-items:center;gap:4px">🔖 حجم الختم <input type="range" id="sr" min="70" max="260" step="5" style="width:90px" oninput="setSS(+this.value)"></span>
+<button class="alt" onclick="printAny()">🖨️ طباعة</button>
+<button class="alt" onclick="clearStamps()">مسح الأختام</button>
+<button class="alt" onclick="resetAll()">دفتر جديد</button>
+<div class="hint" id="hint"></div>
+</div>
+<div class="wrap" id="wrap"></div>
+<div class="book" id="book"></div>
+<script>
+var S={v:{},stamps:[]},KEY="dafter-aaili-v1",stampMode=0;
+function load(){try{var t=localStorage.getItem(KEY);if(t)S=JSON.parse(t)}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function fld(p,l,k,t,opts){var id=p+'.'+k,i;
+ if(opts)i='<select data-k="'+id+'">'+opts.map(function(o){return'<option>'+o+'</option>'}).join('')+'</select>';
+ else i='<input data-k="'+id+'" type="'+(t||'text')+'">';
+ return'<div class="f"><label>'+l+'</label>'+i+'</div>'}
+function photo(id,c){return'<div class="ph '+c+'" data-ph="'+id+'"><img alt=""><span>📷 صورة</span><b class="x" title="حذف الصورة">×</b><input type="file" accept="image/*"></div>'}
+function head(t,s){return'<div class="top">الجمهورية الجزائرية الديمقراطية الشعبية<small>وزارة الداخلية والجماعات المحلية والتهيئة العمرانية</small></div><div class="flag"></div><h2>'+t+'</h2><div class="sub">'+(s||'')+'</div>'}
+function person(p,t,extra){var f=[['اللقب','nom'],['الاسم','pre'],['تاريخ الميلاد','dn','date'],['مكان الميلاد','ln'],['رقم شهادة الميلاد','ac'],['اسم الأب','pere'],['اسم الأم ولقبها','mere'],['المهنة','job'],['العنوان','adr']];
+ var h=photo(p,'big')+head(t,'الحالة المدنية');(extra||'')&&(h+=extra);f.forEach(function(x){h+=fld(p,x[0],x[1],x[2])});return h}
+function rows(p,from,n){var h='<table><tr><th>#</th><th>الصورة</th><th>اللقب والاسم</th><th>الجنس</th><th>تاريخ الميلاد</th><th>مكان الميلاد</th><th>رقم العقد</th></tr>';
+ for(var i=from;i<from+n;i++){var q=p+'.'+i;h+='<tr><td>'+i+'</td><td style="width:58px">'+photo('k'+i,'sm')+'</td><td><input data-k="'+q+'.n"></td><td><select data-k="'+q+'.s"><option></option><option>ذكر</option><option>أنثى</option></select></td><td><input type="date" data-k="'+q+'.d"></td><td><input data-k="'+q+'.l"></td><td><input data-k="'+q+'.a"></td></tr>'}
+ return h+'</table>'}
+function sz(r){return'<div class="sz'+(r?' r':'')+'">'+(r?'إمضاء صاحب الدفتر':'ختم وإمضاء ضابط الحالة المدنية')+'</div>'}
+var pages=[
+ '<div class="cover" style="min-height:930px">'+head('')+'<h1>دفتر عائلي</h1><div class="sub" style="font-size:20px">LIVRET DE FAMILLE</div><br>'+fld('c','رقم الدفتر','no')+fld('c','البلدية','com')+fld('c','الدائرة','dai')+fld('c','الولاية','wil')+fld('c','تاريخ التسليم','dt','date')+'</div>'+sz(0),
+ person('h','الزوج'),
+ person('w','الزوجة',fld('w','اللقب قبل الزواج','nomf'))+'',
+ head('عقد الزواج','')+fld('m','تاريخ الزواج','d','date')+fld('m','مكان الزواج','l')+fld('m','رقم عقد الزواج','a')+fld('m','المهر / ملاحظات','n')+fld('m','تاريخ التسجيل','r','date')+fld('m','ضابط الحالة المدنية','o'),
+ head('الأولاد','الصفحة 1')+rows('k',1,6),
+ head('الأولاد','الصفحة 2')+rows('k',7,6),
+ head('تأشيرات وملاحظات','وفاة – طلاق – تغيير – تصحيح')+'<div class="f"><textarea data-k="z.t" rows="14" style="border:1.5px dotted #666;font-size:16px"></textarea></div>'
+];
+function build(){var w=document.getElementById('wrap');
+ w.innerHTML=pages.map(function(h,i){return'<div class="page" data-p="'+i+'">'+h+(i==0||i>=4?'':sz(0))+(i==1||i==2?sz(1):'')+'<div class="num">'+(i+1)+' / '+pages.length+'</div><div class="layer"></div></div>'}).join('');
+ w.querySelectorAll('[data-k]').forEach(function(e){var v=S.v[e.dataset.k];if(v!=null)e.value=v;e.addEventListener('input',function(){S.v[e.dataset.k]=e.value;save();if(e.dataset.k.indexOf('c.')==0)autoStamp();renderStamps()})});
+ w.querySelectorAll('.page').forEach(function(p){p.addEventListener('pointerdown',function(ev){
+  if(!stampMode||ev.target.closest('.stamp'))return;var r=p.getBoundingClientRect(),sc=r.width/794;
+  S.stamps.push({p:+p.dataset.p,x:(ev.clientX-r.left)/sc,y:(ev.clientY-r.top)/sc,r:Math.round(Math.random()*16-12)});save();renderStamps()})});
+ document.querySelectorAll('.bar [data-k]').forEach(function(e){var v=S.v[e.dataset.k];if(v!=null)e.value=v;e.addEventListener('input',function(){S.v[e.dataset.k]=e.value;save();renderStamps()})});
+ initPhotos();autoStamp();renderStamps();mode(stampMode)}
+function initPhotos(){document.querySelectorAll('#wrap .ph').forEach(function(d){var id='ph.'+d.dataset.ph,img=d.querySelector('img'),inp=d.querySelector('input');
+ function show(){if(S.v[id]){img.src=S.v[id];d.classList.add('has')}else{img.removeAttribute('src');d.classList.remove('has')}}
+ show();
+ d.querySelector('.x').addEventListener('click',function(ev){ev.stopPropagation();delete S.v[id];save();show()});
+ inp.addEventListener('change',function(){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var k=Math.min(1,360/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);S.v[id]=c.toDataURL('image/jpeg',.82);save();show()};im.src=r.result};r.readAsDataURL(f);inp.value=''})})}
+function autoStamp(){var s1=document.getElementById('s1'),c=S.v['c.com'],d=S.v['c.dt'];
+ if(c&&!S.v.s1){s1.value='بلدية '+c}
+ if(d&&!S.v.s3){document.getElementById('s3').value=d}}
+function renderStamps(){var g=function(i){return document.getElementById(i).value},col=g('sc');
+ document.querySelectorAll('.layer').forEach(function(l,i){l.innerHTML=S.stamps.map(function(s,j){return s.p!=i?'':'<div class="stamp" data-j="'+j+'" style="left:'+s.x+'px;top:'+s.y+'px;--sc:'+col+';--ss:'+(S.v.ss||150)+'px;--rot:'+s.r+'deg">'+(g('s1')?'<b>'+g('s1')+'</b>':'')+'<span>'+g('s2')+'</span><span>'+g('s3')+'</span></div>'}).join('')});
+ document.querySelectorAll('.stamp').forEach(function(e){
+  e.addEventListener('dblclick',function(){S.stamps.splice(+e.dataset.j,1);save();renderStamps()});
+  e.addEventListener('pointerdown',function(ev){ev.stopPropagation();var s=S.stamps[+e.dataset.j],pg=e.closest('.page'),sc=pg.getBoundingClientRect().width/794,sx=ev.clientX,sy=ev.clientY,ox=s.x,oy=s.y;e.setPointerCapture(ev.pointerId);
+   e.onpointermove=function(m){s.x=ox+(m.clientX-sx)/sc;s.y=oy+(m.clientY-sy)/sc;e.style.left=s.x+'px';e.style.top=s.y+'px'};
+   e.onpointerup=function(){e.onpointermove=null;save()}})})}
+function mode(m){stampMode=m;document.body.classList.toggle('stamping',!!m);
+ document.querySelectorAll('.page').forEach(function(p){p.classList.toggle('ro',!!m)});
+ document.querySelectorAll('.page [data-k]').forEach(function(e){e.readOnly=!!m;if(e.tagName=='SELECT')e.disabled=!!m;e.tabIndex=m?-1:0});
+ document.querySelectorAll('.ph input').forEach(function(e){e.disabled=!!m});document.getElementById('bFill').className=m?'alt':'on';document.getElementById('bStamp').className=m?'on':'alt';
+ document.getElementById('hint').textContent=m?'انقر على الصفحة لوضع الختم، اسحبه لتحريكه، ونقرتان على الختم لحذفه.':'املأ بيانات الدفتر، تُحفظ تلقائياً في هذا المتصفح. ثم انتقل إلى «عرض للختم».'}
+function clearStamps(){S.stamps=[];save();renderStamps()}
+function resetAll(){if(confirm('مسح كل البيانات والبدء بدفتر جديد؟')){S={v:{},stamps:[]};save();document.querySelectorAll('.bar input[data-k]').forEach(function(e){e.value=e.id=='s2'?'مصلحة الحالة المدنية':e.id=='sc'?'#1b3fbf':''});build()}}
+function fitZ(){setZ(Math.max(.3,Math.min(1.6,(window.innerWidth-16)/(document.body.classList.contains('bookview')?1118:794))))}
+function buildBook(){var b=document.getElementById('book'),src=document.querySelectorAll('#wrap .page'),n=Math.ceil(src.length/4)*4;b.innerHTML='';
+ function cell(i){var c=document.createElement('div');c.className='cell';var p;
+  if(i<=src.length){var o=src[i-1];p=o.cloneNode(true);var a=o.querySelectorAll('[data-k]');p.querySelectorAll('[data-k]').forEach(function(e,j){e.value=a[j].value})}
+  else{p=document.createElement('div');p.className='page';p.innerHTML='<div class="num" style="bottom:50%;font-size:16px">'+(i==n?'الغلاف الخلفي':'')+'</div>'}
+  c.appendChild(p);return c}
+ for(var k=0;k<n/4;k++){[[1+2*k,n-2*k,'الوجه الأمامي'],[n-2*k-1,2*k+2,'الوجه الخلفي']].forEach(function(s){
+  var w=document.createElement('div');w.className='bw';
+  var l=document.createElement('div');l.className='sl';l.textContent='الورقة '+(k+1)+' – '+s[2]+' (الصفحتان '+s[0]+' و '+s[1]+')';
+  var sh=document.createElement('div');sh.className='sheet';sh.appendChild(cell(s[0]));sh.appendChild(cell(s[1]));
+  w.appendChild(l);w.appendChild(sh);b.appendChild(w)})}}
+function toggleBook(){var on=!document.body.classList.contains('bookview');if(on)buildBook();
+ document.body.classList.toggle('bookview',on);document.getElementById('bBook').className=on?'on':'alt';
+ if(on){document.getElementById('hint').textContent='معاينة الكتيّب: اضغط «طباعة»، اختر A4 أفقي ووجهين (قلب على الحافة القصيرة)، ثم اطوِ الأوراق من المنتصف وثبّتها بالدبابيس عند خط الطي.'}else{mode(stampMode)}}
+function printAny(){if(document.body.classList.contains('bookview')){var st=document.createElement('style');st.id='pgst';st.textContent='@page{size:A4 landscape;margin:0}';document.head.appendChild(st)}window.print()}
+window.addEventListener('afterprint',function(){var s=document.getElementById('pgst');if(s)s.remove()});
+function setZ(z){z=Math.round(z*100)/100;S.v.z=z;save();applyZ()}
+function zoomBy(d){setZ(Math.max(.3,Math.min(1.6,(S.v.z||curZ())+d)))}
+function curZ(){return S.v.z||Math.min(1,(window.innerWidth-16)/794)}
+function applyZ(){var z=curZ();document.documentElement.style.setProperty('--z',z);document.getElementById('zr').value=z;document.getElementById('zv').textContent=Math.round(z*100)+'%'}
+function setSS(v){S.v.ss=v;save();document.getElementById('sr').value=v;renderStamps()}
+load();build();applyZ();document.getElementById('sr').value=S.v.ss||150;
+</script>
+</body>
+</html>
